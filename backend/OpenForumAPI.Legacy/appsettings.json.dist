@@ -1,0 +1,13 @@
+# appsettings.json model
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": ...,
+      "Microsoft.AspNetCore": ...
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": ...
+  }
+}
