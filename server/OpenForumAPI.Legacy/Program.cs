@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using OpenForumAPI.Legacy.Data;
 using OpenForumAPI.Legacy.Models;
+using OpenForumAPI.Legacy.Interfaces;
+using OpenForumAPI.Legacy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +53,9 @@ builder.Services.AddAuthentication(opt =>
             Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!)),
     };
 });
+
+// DI Container
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
