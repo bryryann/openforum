@@ -9,5 +9,8 @@
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "DefaultConnection": ...
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": <psql_connection_string>
   }
 }
