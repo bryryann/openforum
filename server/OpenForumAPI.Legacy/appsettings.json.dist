@@ -12,5 +12,10 @@
   },
   "ConnectionStrings": {
     "DefaultConnection": <psql_connection_string>
-  }
+  },
+  "JWT": {
+    "Issuer": <issuer_uri>,
+    "Audience": <audience_uri>,
+    "SigningKey": <jwt_key>
+  },
 }
