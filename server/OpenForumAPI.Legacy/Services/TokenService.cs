@@ -59,4 +59,21 @@ public class TokenService : ITokenService
         var authorizationHeader = _accessor.HttpContext?.Request.Headers["Authorization"].ToString();
         return authorizationHeader?.Split(" ").LastOrDefault();
     }
+
+    /// <summary>
+    /// Parses the JWT token to get the given_name claim value
+    /// </summary>
+    /// <param name="token">Token string to be parsed</param>
+    /// <returns> A string with the given_name claim value </returns>
+    public string GetUsernameFromToken(string token)
+    {
+        var jwtHandler = new JwtSecurityTokenHandler();
+        var claims = jwtHandler.ReadJwtToken(token).Claims;
+
+        var usernameClaim = claims.FirstOrDefault(c => c.Type == "given_name" || c.Type == ClaimTypes.GivenName);
+        if (usernameClaim == null)
+            throw new InvalidOperationException("given_name not found in jwt claim");
+
+        return usernameClaim.Value;
+    }
 }

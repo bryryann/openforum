@@ -1,3 +1,5 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -28,10 +30,15 @@ public class AccountController : ControllerBase
 
     [HttpGet("user")]
     [Authorize]
-    public async Task<IActionResult> GetInfo()
+    public IActionResult GetInfo()
     {
-        var header = _tokens.GetToken();
-        return Ok(header);
+        string? header = _tokens.GetToken();
+        if (header == null)
+            return BadRequest();
+
+        var username = _tokens.GetUsernameFromToken(header);
+
+        return Ok(username);
     }
 
     [HttpPost("login")]

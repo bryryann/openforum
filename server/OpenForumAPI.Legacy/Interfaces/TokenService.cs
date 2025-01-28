@@ -7,5 +7,7 @@ public interface ITokenService
     string CreateToken(User user);
 
     string? GetToken();
+
+    string? GetUsernameFromToken(string token);
 }
 
