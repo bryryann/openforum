@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddHttpContextAccessor();
 
 // Add Identity Database Context to DI Container
 builder.Services.AddDbContext<AppDbContext>(options =>

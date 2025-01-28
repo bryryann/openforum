@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using OpenForumAPI.Legacy.Models;
 using OpenForumAPI.Legacy.Interfaces;
@@ -23,6 +24,14 @@ public class AccountController : ControllerBase
         this._userManager = userManager;
         this._signInManager = signInManager;
         this._tokens = tokenService;
+    }
+
+    [HttpGet("user")]
+    [Authorize]
+    public async Task<IActionResult> GetInfo()
+    {
+        var header = _tokens.GetToken();
+        return Ok(header);
     }
 
     [HttpPost("login")]
