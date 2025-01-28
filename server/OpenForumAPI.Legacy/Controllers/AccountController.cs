@@ -1,5 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenForumAPI.Legacy.Models;
 using OpenForumAPI.Legacy.Interfaces;
 using OpenForumAPI.Legacy.Dtos.Authentication;
+using OpenForumAPI.Legacy.Mappers;
 
 namespace OpenForumAPI.Legacy.Controllers;
 
@@ -30,7 +29,7 @@ public class AccountController : ControllerBase
 
     [HttpGet("user")]
     [Authorize]
-    public IActionResult GetInfo()
+    public async Task<IActionResult> GetInfo()
     {
         string? header = _tokens.GetToken();
         if (header == null)
@@ -38,7 +37,11 @@ public class AccountController : ControllerBase
 
         var username = _tokens.GetUsernameFromToken(header);
 
-        return Ok(username);
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == username);
+        if (user == null)
+            return StatusCode(500);
+
+        return Ok(UserMapper.MapUserToUserData(user));
     }
 
     [HttpPost("login")]

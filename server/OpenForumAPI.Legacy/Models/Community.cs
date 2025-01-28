@@ -13,4 +13,8 @@ public class Community
     [MinLength(4, ErrorMessage = "Community handle too short.")]
     [MaxLength(30, ErrorMessage = "Community handle too long.")]
     public string? Handle { get; set; }
+
+    public string? Description { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
