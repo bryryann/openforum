@@ -11,6 +11,8 @@ public class AppDbContext : IdentityDbContext<User>
         : base(options)
     { }
 
+    public DbSet<Community> Communities { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
