@@ -21,8 +21,21 @@ public class CommunityController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] CommunityQueryObject query)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         var communities = await _communityRepo.GetCommunities(pageSize: query.PageSize, pageNumber: query.PageNumber);
 
         return Ok(communities.Select(c => c.MapToResponse()));
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> FindCommunityById([FromRoute] int id)
+    {
+        var community = await _communityRepo.FindCommunity(id);
+        if (community == null)
+            return NotFound("Community id not found");
+
+        return Ok(community.MapToResponse());
     }
 }
