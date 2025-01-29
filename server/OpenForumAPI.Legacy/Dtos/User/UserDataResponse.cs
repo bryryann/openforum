@@ -1,5 +1,3 @@
-using OpenForumAPI.Legacy.Models;
-
 namespace OpenForumAPI.Legacy.Dtos.User;
 
 public class UserDataResponse
@@ -8,5 +6,5 @@ public class UserDataResponse
 
     public required string Email { get; set; }
 
-    public required List<Community> Communities { get; set; }
+    public required List<Models.Community> Communities { get; set; }
 }
