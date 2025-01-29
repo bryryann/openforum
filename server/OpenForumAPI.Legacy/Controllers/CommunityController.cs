@@ -11,17 +11,17 @@ namespace OpenForumAPI.Legacy.Controllers;
 [Authorize]
 public class CommunityController : ControllerBase
 {
-    private readonly ICommunityService _communityService;
+    private readonly ICommunityRepository _communityRepo;
 
-    public CommunityController(ICommunityService communityService)
+    public CommunityController(ICommunityRepository communityRepo)
     {
-        _communityService = communityService;
+        _communityRepo = communityRepo;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] CommunityQueryObject query)
     {
-        var communities = await _communityService.GetCommunities(pageSize: query.PageSize, pageNumber: query.PageNumber);
+        var communities = await _communityRepo.GetCommunities(pageSize: query.PageSize, pageNumber: query.PageNumber);
 
         return Ok(communities.Select(c => c.MapToResponse()));
     }

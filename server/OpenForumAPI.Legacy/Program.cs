@@ -7,6 +7,7 @@ using Scalar.AspNetCore;
 using OpenForumAPI.Legacy.Data;
 using OpenForumAPI.Legacy.Models;
 using OpenForumAPI.Legacy.Interfaces;
+using OpenForumAPI.Legacy.Repositories;
 using OpenForumAPI.Legacy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,7 +58,7 @@ builder.Services.AddAuthentication(opt =>
 
 // DI Container
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<ICommunityService, CommunityService>();
+builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
 
 var app = builder.Build();
 

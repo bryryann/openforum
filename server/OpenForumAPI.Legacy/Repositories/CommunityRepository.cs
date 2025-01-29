@@ -3,13 +3,13 @@ using OpenForumAPI.Legacy.Data;
 using OpenForumAPI.Legacy.Interfaces;
 using OpenForumAPI.Legacy.Models;
 
-namespace OpenForumAPI.Legacy.Services;
+namespace OpenForumAPI.Legacy.Repositories;
 
-public class CommunityService : ICommunityService
+public class CommunityRepository : ICommunityRepository
 {
     private readonly AppDbContext _context;
 
-    public CommunityService(AppDbContext context)
+    public CommunityRepository(AppDbContext context)
     {
         _context = context;
     }
