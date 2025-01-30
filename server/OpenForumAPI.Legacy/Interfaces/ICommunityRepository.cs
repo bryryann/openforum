@@ -9,5 +9,7 @@ public interface ICommunityRepository
 
     Task<Community?> FindCommunity(int id);
 
-    Task<Community?> CreateCommunity(CreateCommunityRequest communityModel);
+    Task<Community?> CreateCommunity(CreateCommunityRequest communityModel, string userName);
+
+    Task<bool> CommunityExists(string handle);
 }

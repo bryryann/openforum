@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(opt =>
 // DI Container
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

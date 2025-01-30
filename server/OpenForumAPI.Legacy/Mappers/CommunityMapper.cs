@@ -10,6 +10,14 @@ public static class CommunityMapper
         {
             Id = community.Id,
             Handle = community.Handle!,
-            Description = community.Description
+            Description = community.Description,
+        };
+
+    public static Community NewCommunity(this CreateCommunityRequest model, User u) =>
+        new Community
+        {
+            Handle = model.Handle,
+            Description = model.Description,
+            Moderators = new List<User> { u }
         };
 }

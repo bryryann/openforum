@@ -13,8 +13,11 @@ public class CommunityController : ControllerBase
 {
     private readonly ICommunityRepository _communityRepo;
 
-    public CommunityController(ICommunityRepository communityRepo)
+    private readonly ITokenService _tokens;
+
+    public CommunityController(ITokenService tokens, ICommunityRepository communityRepo)
     {
+        _tokens = tokens;
         _communityRepo = communityRepo;
     }
 
@@ -37,5 +40,24 @@ public class CommunityController : ControllerBase
             return NotFound("Community id not found");
 
         return Ok(community.MapToResponse());
+    }
+
+    [HttpPost("")]
+    public async Task<IActionResult> CreateCommunity([FromBody] CreateCommunityRequest model)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var header = _tokens.GetToken();
+        if (header == null)
+            return StatusCode(500);
+
+        var userName = _tokens.GetUsernameFromToken(header);
+
+        var newCommunity = await _communityRepo.CreateCommunity(model, userName!);
+        if (newCommunity == null)
+            return BadRequest();
+
+        return Ok(newCommunity.MapToResponse());
     }
 }
