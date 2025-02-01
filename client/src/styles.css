@@ -1,3 +1,8 @@
+:root {
+  --primary-color: 19, 96, 219;
+  --primary-accent: 69, 134, 239;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
