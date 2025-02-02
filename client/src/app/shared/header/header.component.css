@@ -34,7 +34,7 @@ header {
   }
 }
 
-.account-btn {
+.account-link {
   color: rgb(var(--primary-color));
   padding: 5px 2px;
   background: none;
