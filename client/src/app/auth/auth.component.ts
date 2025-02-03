@@ -1,14 +1,13 @@
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LoginFormComponent } from './login-form/login-form.component';
-import { RegisterFormComponent } from './register-form/register-form.component';
+import { AuthFormComponent } from './form/auth-form.component';
 import { AuthView, isAuthView } from './auth.model';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [LoginFormComponent, RegisterFormComponent],
+  imports: [AuthFormComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
@@ -27,6 +26,6 @@ export class AuthComponent implements OnInit {
   }
 
   toggleView() {
-    //
+    this.view.update(prev => prev === 'login' ? 'register' : 'login');
   }
 }

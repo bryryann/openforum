@@ -1,11 +1,15 @@
 @if (view() === 'login' || view() === undefined) {
-  <app-login-form />
+  <app-auth-form>
+    <p>login form here</p>
+  </app-auth-form>
   <div>
     Not registered yet?
     <button class="toggle-view" (click)="toggleView()" >Create an account!</button>
   </div>
 } @else if(view() === 'register') {
-  <app-register-form />
+  <app-auth-form>
+    <p>register form here</p>
+  </app-auth-form>
   <div>
     Already have an account?
     <button class="toggle-view" (click)="toggleView()" >Log In!</button>
