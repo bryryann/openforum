@@ -1,14 +1,14 @@
 <header>
   <div class="header-title">
-    <h2>
+    <h2 [routerLink]="['/welcome']">
       OpenForum
     </h2>
     <p>The forum for programmers.</p>
   </div>
 
   <div class="buttons">
-    <a class="account-link">Log In</a>
+    <a [routerLink]="['/auth']" class="account-link">Log In</a>
     or
-    <a class="account-link">Create Account</a>
+    <a [routerLink]="['/auth']" class="account-link">Create Account</a>
   </div>
 </header>

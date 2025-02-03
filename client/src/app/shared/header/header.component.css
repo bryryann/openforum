@@ -36,6 +36,7 @@ header {
 
 .account-link {
   color: rgb(var(--primary-color));
+  text-decoration: none;
   padding: 5px 2px;
   background: none;
   border: none;
