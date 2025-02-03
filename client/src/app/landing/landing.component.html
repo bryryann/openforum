@@ -8,6 +8,12 @@
     </p>
   </div>
   <div>
-    <a [routerLink]="['/auth']" class="join-btn">Join Today!</a>
+    <a
+      [routerLink]="['/auth']"
+      [queryParams]="{view: 'login'}"
+      class="join-btn"
+    >
+      Join Today!
+    </a>
   </div>
 </article>
