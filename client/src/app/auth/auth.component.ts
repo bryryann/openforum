@@ -1,13 +1,14 @@
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AuthFormComponent } from './form/auth-form.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 import { AuthView, isAuthView } from './auth.model';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [AuthFormComponent],
+  imports: [LoginComponent, SignupComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
