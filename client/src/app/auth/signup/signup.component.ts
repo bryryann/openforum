@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+
+import { AuthValidator } from '../auth.validator';
 
 @Component({
   selector: 'app-signup',
@@ -10,19 +12,31 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class SignupComponent {
   form = new FormGroup({
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
+    username: new FormControl('', {
+      validators: [Validators.required]
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email]
+    }),
+    password: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        AuthValidator.hasLowerCase,
+        AuthValidator.hasUpperCase,
+        AuthValidator.hasNumber,
+        AuthValidator.hasSpecial
+      ]
+    }),
+    confirmPassword: new FormControl('', {
+      validators: [Validators.required]
+    })
   });
 
   onSubmit() {
-    const { username, email, password, confirmPassword } = this.form.value;
+    if (this.form.invalid) return;
 
-    console.log(`username: ${username}`);
-    console.log(`email: ${email}`);
-    console.log(`password: ${password}`);
-    console.log(`confirmPassword: ${confirmPassword}`);
+    console.log('valid form');
 
     this.form.reset();
   }
