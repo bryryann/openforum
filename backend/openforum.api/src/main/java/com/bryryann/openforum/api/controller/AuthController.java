@@ -1,10 +1,12 @@
 package com.bryryann.openforum.api.controller;
 
 import com.bryryann.openforum.api.dto.user.LoginRequest;
+import com.bryryann.openforum.api.dto.user.LoginResponse;
 import com.bryryann.openforum.api.dto.user.RegisterRequest;
 import com.bryryann.openforum.api.model.User;
 import com.bryryann.openforum.api.repository.UserRepository;
 import com.bryryann.openforum.api.security.UserRole;
+import com.bryryann.openforum.api.service.JwtTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,14 +23,17 @@ public class AuthController {
 
     private final UserRepository repository;
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenService jwtTokenService;
 
     @Autowired
     public AuthController(
             UserRepository repository,
-            AuthenticationManager authenticationManager
+            AuthenticationManager authenticationManager,
+            JwtTokenService jwtTokenService
     ) {
         this.repository = repository;
         this.authenticationManager = authenticationManager;
+        this.jwtTokenService = jwtTokenService;
     }
 
     /**
@@ -37,14 +42,14 @@ public class AuthController {
      * @return         If successful, send a JWT Token as response. Otherwise, Forbidden.
      */
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         var userToken =
                 new UsernamePasswordAuthenticationToken(request.username(), request.password());
         var auth = authenticationManager.authenticate(userToken);
 
-        // JWT TOKEN GENERATION HERE...
+        var token = jwtTokenService.generateToken((User) auth.getPrincipal());
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new LoginResponse(token));
     }
 
     /**
