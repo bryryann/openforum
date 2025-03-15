@@ -9,8 +9,10 @@ const Auth: React.FC = () => {
     useRootClass('authentication-page');
 
     return (<>
-        <LoginForm /> {/* Non-Functional */}
-        <RegisterForm /> {/* Non-Functional */}
+        <div className="form-section">
+            <LoginForm /> {/* Non-Functional */}
+            <RegisterForm /> {/* Non-Functional */}
+        </div>
     </>);
 };
 

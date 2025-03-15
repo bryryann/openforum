@@ -3,21 +3,24 @@ import './style.css';
 
 const RegisterForm: React.FC = () => {
     return (
-        <div id="register-form">
-            <h3>Create account</h3>
-            <p>Join OpenForum now!</p>
+        <div className="form" id="register-form">
+            <div className="form-header">
+                <h3>Create account</h3>
+                <p>Join OpenForum now!</p>
+            </div>
 
             <form>
-                <label htmlFor="username">Username: </label>
+                <label htmlFor="username">Username</label>
                 <input type="text" name="username" />
-                <br />
-                <label htmlFor="password">Password: </label>
+
+                <label htmlFor="password">Password</label>
                 <input type="password" name="password" />
-                <br />
-                <label htmlFor="confirm-password">Confirm Password: </label>
-                <input type="password" name="confirm-password" />
-                <br />
-                <button type="submit">Sign Up</button>
+
+                <label>
+                    Confirm Password:
+                    <input type="password" name="confirm-password" />
+                </label>
+                <button id="register-btn" type="submit">Sign Up</button>
             </form>
         </div>
     );
