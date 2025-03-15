@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 /**
@@ -13,13 +14,12 @@ const Header: React.FC = () => {
             <h2>OpenForum</h2>
             <div className="header-btn-list">
 
-                <button>Home</button> {/* Non Functional */}
-                <button>About</button> {/* Non Functional */}
+                <Link to="#" replace={true}>Home</Link> {/* Non Functional */}
+                <Link to="#" replace={true}>About</Link> {/* Non Functional */}
                 <div className="account-section">
-                    <button id="login-button">Log In</button> {/* Non Functional */}
-                    <button id="register-button">Register</button> {/* Non Functional */}
+                    <Link to="/auth" replace={true}>Sign up</Link> {/* Non Functional */}
                 </div>
-                <button>FAQ</button> {/* Non Functional */}
+                <Link to="#" replace={true}>FAQ</Link> {/* Non Functional */}
             </div>
         </header>
     );

@@ -21,7 +21,7 @@
 
 }
 
-.header-btn-list button {
+.header-btn-list a {
     max-width: 150px;
     padding-right: 35px;
     padding-block: 6px;
@@ -29,6 +29,7 @@
     background: none;
     border: none;
     color: white;
+    text-decoration: none;
 
     opacity: 0.8;
     cursor: pointer;
@@ -36,6 +37,7 @@
 
     &:hover {
         opacity: 1;
+        text-decoration: underline;
     }
 }
 
