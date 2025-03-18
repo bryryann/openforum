@@ -1,3 +1,8 @@
+import axios from 'axios';
+import client from '../config/client';
+
+axios.defaults.withCredentials = true;
+
 interface AuthenticationRequest {
     username: string;
     password: string;
@@ -12,23 +17,15 @@ interface FetchPostOptions {
 type ApiAuth = (cred: AuthenticationRequest) => Promise<object>;
 
 export const performLogin: ApiAuth = async (credentials) => {
-    const response = await fetch('/api/auth/login', postRequest(credentials));
-
+    const response = await axios.post(`${client.API}/auth/login`, postRequest(credentials));
     // TEMPORARY ERROR HANDLING
-    if (!response.ok) {
-        throw new Error('error');
-    }
-    return await response.json();
+    return await response.data();
 };
 
 export const performRegister: ApiAuth = async (credentials) => {
-    const response = await fetch('/api/auth/register', postRequest(credentials));
-
+    const response = await axios.post(`${client.API}/auth/register`, postRequest(credentials));
     // TEMPORARY ERROR HANDLING
-    if (!response.ok) {
-        throw new Error('error');
-    }
-    return await response.json();
+    return await response.data();
 };
 
 const postRequest = (body: object): FetchPostOptions => {
